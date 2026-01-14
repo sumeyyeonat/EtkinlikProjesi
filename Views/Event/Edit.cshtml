@@ -1,0 +1,33 @@
+@model EtkinlikSistemi.Models.Event
+
+<div class="container mt-4">
+    <h4>Etkinliği Düzenle</h4>
+    <hr />
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" /> @* Id'yi gizli tutuyoruz ki değişmesin *@
+        
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location" class="form-label"></label>
+            <input asp-for="Location" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EventDate" class="form-label"></label>
+            <input asp-for="EventDate" class="form-control" type="date" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Capacity" class="form-label"></label>
+            <input asp-for="Capacity" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+    </form>
+</div>

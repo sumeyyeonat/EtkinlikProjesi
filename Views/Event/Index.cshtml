@@ -1,0 +1,51 @@
+@model IEnumerable<EtkinlikSistemi.Models.Event>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="display-6 fw-bold text-primary">Aktif Etkinlikler</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-success shadow-sm">
+                <i class="bi bi-plus-circle"></i> Yeni Etkinlik Ekle
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center p-5 border rounded bg-light">
+            <p class="text-muted">Henüz planlanmış bir etkinlik bulunmuyor.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 border-top border-primary border-4">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@item.Name</h5>
+                            <p class="card-text text-muted mb-1">
+                                <i class="bi bi-geo-alt"></i> @item.Location
+                            </p>
+                            <p class="card-text small text-secondary">
+                                <i class="bi bi-calendar3"></i> @item.EventDate.ToLongDateString()
+                            </p>
+                            <div class="badge bg-info text-dark">Kapasite: @item.Capacity</div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between pb-3">
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm">Düzenle</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Detay</a>
+                            </div>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" 
+                               onclick="return confirm('Silmek istediğine emin misin?')">Sil</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
